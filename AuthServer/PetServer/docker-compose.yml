@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  app:
+    container_name: PetServer
+    image: pet_server
+    build: ./
+    ports:
+      - "8081:8081"
+    depends_on:
+      - pgdb
+  pgdb:
+    container_name: pg_pet_db
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '1234'
+      POSTGRES_DB: 'petservice'
+      POSTGRES_SCHEMA: 'pet_server'

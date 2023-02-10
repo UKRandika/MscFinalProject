@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  app:
+    container_name: ClinicServer
+    image: pet_server
+    build: ./
+    ports:
+      - "8082:8082"
+    depends_on:
+      - pgdb
+  pgdb:
+    container_name: pg_pet_db
+    image: postgres
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: '1234'
+      POSTGRES_DB: 'clinicserver'
+      POSTGRES_SCHEMA: 'pet_server'
